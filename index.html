@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Yahya Oucheikh — Portfolio</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<style>
+:root{
+  --brand-1:#00b894;
+  --brand-2:#0a3d3f;
+  --text:#1b1f24;
+  --muted:#6b7a8c;
+  --card:#ffffff;
+  --shadow:0 15px 35px rgba(0,0,0,.15);
+  --radius:18px;
+}
+body,*{box-sizing:border-box;margin:0;padding:0;font-family:'Poppins',sans-serif;scroll-behavior:smooth;}
+a{text-decoration:none;color:inherit;}
+
+/* Navbar */
+.nav{
+  position: sticky;
+  top:0;
+  background:#ffffffcc;
+  backdrop-filter: saturate(140%) blur(10px);
+  border-bottom:1px solid rgba(0,0,0,.05);
+  z-index: 100;
+}
+.nav .wrap{
+  display:flex;
+  align-items:center;
+  gap:24px;
+  padding:14px 20px;
+}
+.brand{font-weight:800;color:var(--brand-2);}
+.brand span{color:var(--brand-1);}
+.nav ul{
+  list-style:none;
+  display:flex;
+  gap:30px;
+  margin-left:auto;
+}
+.nav ul li a{
+  font-weight:600;
+  padding:8px 12px;
+  border-radius:8px;
+  transition: all 0.3s ease;
+}
+.nav ul li a:hover{
+  color:var(--brand-1);
+  background: rgba(0,185,148,0.1);
+  transform: translateY(-2px);
+}
+.nav ul li a.active{
+  color: var(--brand-1);
+  font-weight:700;
+}
+
+/* Hero Section */
+.hero{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(135deg,var(--brand-1),var(--brand-2));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:480px;
+}
+.hero canvas{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;}
+.hero .wrap{
+  position:relative;
+  z-index:1;
+  max-width:1200px;
+  width:100%;
+  padding:20px;
+}
+.hero-content{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:40px;
+  flex-wrap:wrap;
+}
+.hero-text{flex:1;color:#fff;}
+.hero-image{
+  width:260px;
+  height:260px;
+  object-fit:cover;
+  border-radius:50%;
+  margin-left:0;
+  transition: transform 0.5s ease;
+}
+.hero-image:hover{
+  transform: scale(1.05);
+  filter: drop-shadow(0 25px 50px rgba(0,0,0,.4)) brightness(1.15) contrast(1.25) saturate(1.4);
+}
+.lead{
+  font-size:42px;
+  line-height:1.2;
+  font-weight:800;
+  margin-bottom:10px;
+}
+.sub{
+  font-size:18px;
+  opacity:.9;
+  margin-bottom:20px;
+}
+.cta-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.btn-primary{background:#fff;color:#0b3d3f;border-radius:999px;padding:12px 18px;font-weight:700;box-shadow:var(--shadow);transition: transform 0.3s, box-shadow 0.3s;}
+.btn-primary:hover{transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.2);}
+
+/* Social Icons */
+.social{
+  display:flex;
+  gap:10px;
+}
+.social a{
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  color:#fff;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.social a.facebook{background:#1877F2;}
+.social a.whatsapp{background:#25D366;}
+.social a.instagram{background:#E1306C;}
+.social a:hover{
+  transform: scale(1.15);
+  box-shadow:0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* Sections */
+section{padding:80px 20px;}
+#about{background-color:#f0f7f9;}
+#skills{background-color:#ffffff;}
+#services{background-color:#f7f9fb;}
+#contact{background-color:#eaf1f8;}
+
+/* Cards */
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:30px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover{
+  transform:translateY(-10px);
+  box-shadow:0 20px 40px rgba(0,0,0,0.25);
+}
+h2{margin-bottom:25px;font-size:26px;}
+p{line-height:1.8;margin-bottom:15px;}
+
+/* About Section */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:30px;}
+.about ul{margin-top:15px;}
+.about li{margin-bottom:10px;}
+
+/* Skills */
+.skills-grid{display:grid;gap:16px;margin-bottom:40px;}
+.skill span{display:block;margin-bottom:6px;font-weight:600;}
+.skill-bar{background:#e3e8ef;border-radius:12px;overflow:hidden;height:16px;}
+.skill-fill{
+  height:100%;
+  background:var(--brand-1);
+  border-radius:12px;
+  width:0;
+  transition: width 1s ease-in-out;
+  animation: pulse 2s infinite alternate;
+}
+@keyframes pulse {
+  0% { opacity: 0.8; transform: scaleX(1); }
+  50% { opacity: 1; transform: scaleX(1.02); }
+  100% { opacity: 0.8; transform: scaleX(1); }
+}
+
+/* Services */
+.services-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+  margin-top:30px;
+}
+.service{display:flex;flex-direction:column;align-items:flex-start;gap:10px;height:100%;}
+.service i{font-size:28px;color:var(--brand-1);}
+.service h3{font-size:18px;margin-bottom:6px;}
+.service p{font-size:14px;line-height:1.5;margin:0;}
+
+/* Contact */
+.contact .card{margin-top:30px;}
+form{display:grid;gap:12px;}
+input,textarea{padding:12px 14px;border-radius:12px;border:1px solid #e3e8ef;font:inherit;}
+textarea{min-height:120px;resize:vertical;}
+.btn-send{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--brand-1);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 50px;
+  padding: 12px 22px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+  border: none;
+}
+.btn-send:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  background: #00d6a0;
+}
+.btn-send i{font-size:16px;}
+
+/* Contact Info Links */
+.contact-info {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+.contact-info a{
+  text-decoration: none;
+  color: #333;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.3s;
+}
+.contact-info a:hover{ color:#0073e6; }
+.contact-info i{font-size:1.5rem;}
+
+/* Footer */
+.footer{text-align:center;color:#60708a;margin:40px auto;font-size:14px;}
+.footer p{margin:5px 0;}
+
+/* Responsive */
+@media(max-width:980px){
+  .lead{font-size:36px;}
+  .about{grid-template-columns:1fr;}
+  .services-grid{grid-template-columns:1fr 1fr;}
+  .skills-grid{grid-template-columns:1fr;}
+  .hero-content{flex-direction:column;text-align:center;}
+  .hero-image{margin-top:20px;width:220px;height:220px;}
+}
+@media(max-width:620px){
+  .lead{font-size:30px;}
+  .services-grid,.skills-grid{grid-template-columns:1fr;}
+  .hero-image{width:180px;height:180px;}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <div class="brand">Yahya <span>Oucheikh</span></div>
+    <ul>
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="home">
+  <canvas id="heroCanvas"></canvas>
+  <div class="wrap">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="lead">
+          I am <span style="color:#fffacd;">Professional Graphic Designer</span><br>
+          And <span style="color:#ffffff;">Web Designer</span>
+        </h1>
+        <p class="sub">
+          I craft clean brands, modern websites, and engaging visuals. Let’s build something great together.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#">Chat with me</a>
+          <div class="social">
+            <a href="https://web.facebook.com/yahya.oucheikh.dev" target="_blank" class="facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/yahya.oucheikh.dev/" target="_blank" class="instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="tel:+212615718328" class="whatsapp"><i class="fa-solid fa-phone"></i></a>
+          </div>
+        </div>
+      </div>
+      <img src="myphoto.png" alt="Portrait" class="hero-image">
+    </div>
+  </div>
+</header>
+
+<section id="about" class="about container">
+  <div class="card">
+    <h2>About Me</h2>
+    <p class="muted">Hi! I’m <strong>Yahya Oucheikh</strong>, a graphic and web designer who loves minimal, bold visuals. I help brands look sharp and websites feel effortless.</p>
+    <ul>
+      <li>3+ years of self-taught design & coding</li>
+      <li>Figma • Adobe XD • Illustrator • HTML • CSS • JS</li>
+      <li>Available for freelance & remote work</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2>Quick Facts</h2>
+    <p class="muted">Based in Morocco · English/Arabic · Fast turnaround</p>
+    <p class="muted">I focus on clarity, contrast, and smooth UX.</p>
+  </div>
+</section>
+
+<section id="skills" class="skills container">
+  <h2>Skills</h2>
+  <div class="skills-grid">
+    <div class="skill"><span>HTML</span><div class="skill-bar"><div class="skill-fill" data-width="90%"></div></div></div>
+    <div class="skill"><span>CSS</span><div class="skill-bar"><div class="skill-fill" data-width="85%"></div></div></div>
+    <div class="skill"><span>JavaScript</span><div class="skill-bar"><div class="skill-fill" data-width="80%"></div></div></div>
+    <div class="skill"><span>Python</span><div class="skill-bar"><div class="skill-fill" data-width="75%"></div></div></div>
+  </div>
+</section>
+
+<section id="services" class="services container">
+  <h2>Services</h2>
+  <div class="services-grid">
+    <div class="card service"><i class="fa-solid fa-pen-ruler"></i><h3>Brand & Visual Identity</h3><p>Logos, color systems, social media kits, and brand guides that pop.</p></div>
+    <div class="card service"><i class="fa-solid fa-display"></i><h3>Web Design</h3><p>Modern, responsive websites built with clean HTML/CSS/JS.</p></div>
+    <div class="card service"><i class="fa-solid fa-layer-group"></i><h3>UI/UX</h3><p>Wireframes and interfaces in Figma or Adobe XD.</p></div>
+  </div>
+</section>
+
+<section id="contact" class="contact container">
+  <h2>Contact</h2>
+  <div class="card">
+    <form onsubmit="sendMail(event)">
+      <input type="text" id="name" placeholder="Your name" required>
+      <input type="email" id="email" placeholder="Your email" required>
+      <textarea id="message" placeholder="Tell me about your project" required></textarea>
+      <button class="btn-send" type="submit"><i class="fa-solid fa-paper-plane"></i> Send</button>
+    </form>
+    <div class="contact-info">
+      <a href="https://web.facebook.com/yahya.oucheikh.dev" target="_blank"><i class="fa-brands fa-facebook-f"></i> Facebook</a>
+      <a href="https://www.instagram.com/yahya.oucheikh.dev/" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a>
+      <a href="tel:+212615718328"><i class="fa-solid fa-phone"></i> 0615718328</a>
+    </div>
+  </div>
+</section>
+
+<div class="footer container">
+  <p>✨💻🌙🖤 © 2025 Yahya Oucheikh. All rights reserved. 💻🌙✨</p>
+</div>
+
+<script>
+// Animate skill bars
+document.querySelectorAll('.skill-fill').forEach(el=>{
+  const target = el.getAttribute("data-width");
+  setTimeout(()=> el.style.width = target, 500);
+});
+
+// Contact form
+function sendMail(e){
+  e.preventDefault();
+  const n=document.getElementById('name').value;
+  const m=document.getElementById('message').value;
+  const mail=`mailto:you@example.com?subject=New%20Project%20from%20${encodeURIComponent(n)}&body=${encodeURIComponent(m)}`;
+  window.location.href=mail;
+}
+
+// Hero canvas animation
+const canvas = document.getElementById('heroCanvas');
+const ctx = canvas.getContext('2d');
+
+function resizeCanvas(){ 
+  const hero = document.querySelector('.hero'); 
+  canvas.width = hero.offsetWidth; 
+  canvas.height = hero.offsetHeight; 
+}
+resizeCanvas();
+window.addEventListener('resize',resizeCanvas);
+
+let stars=[];
+for(let i=0;i<100;i++){stars.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height, r:Math.random()*2+1, alpha:Math.random()});}
+
+let shootingStars=[];
+function generateShootingStar(){
+  shootingStars.push({x:Math.random()*canvas.width,y:0,length:Math.random()*80+30,speed:Math.random()*8+4});
+}
+setInterval(generateShootingStar,2000);
+
+let moon={x:canvas.width-150,y:100,r:50,dx:-0.1,dy:0.05};
+
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  stars.forEach(s=>{
+    ctx.beginPath();
+    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(255,255,255,${s.alpha})`;
+    ctx.fill();
+    s.alpha += (Math.random()-0.5)*0.02;
+    if(s.alpha>1)s.alpha=1;
+    if(s.alpha<0)s.alpha=0;
+  });
+  shootingStars.forEach((sh,i)=>{
+    ctx.beginPath();
+    ctx.moveTo(sh.x,sh.y);
+    ctx.lineTo(sh.x-sh.length, sh.y+sh.length/2);
+    ctx.strokeStyle='white';
+    ctx.stroke();
+    sh.x+=sh.speed;
+    sh.y+=sh.speed/2;
+    if(sh.y>canvas.height) shootingStars.splice(i,1);
+  });
+  ctx.beginPath();
+  ctx.arc(moon.x, moon.y, moon.r, 0, Math.PI*2);
+  ctx.fillStyle='#ccc';
+  ctx.fill();
+  moon.x+=moon.dx;
+  moon.y+=moon.dy;
+  if(moon.x<50) moon.dx=0.1;
+  if(moon.y<50||moon.y>200) moon.dy*=-1;
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+
+</body>
+</html>
+
